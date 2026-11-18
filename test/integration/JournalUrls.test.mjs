@@ -46,7 +46,12 @@ test('production Markdown rendering emits valid Journal URLs and cards in every 
         respond: {isWritable: () => true, code200_Ok: (payload) => { body = payload.body; }}});
     for (const locale of locales) {
         const cards = await blog.collectBlogIndex(locale);
-        assert.equal(cards.length, 81);
+        const journalRoot = path.join(root, 'tmpl/web', locale, 'blog');
+        const years = (await fs.readdir(journalRoot, {withFileTypes: true})).filter((entry) => entry.isDirectory());
+        const expectedCounts = await Promise.all(years.map(async ({name}) =>
+            (await fs.readdir(path.join(journalRoot, name)))
+                .filter((filename) => filename.endsWith('.md')).length));
+        assert.equal(cards.length, expectedCounts.reduce((sum, count) => sum + count, 0));
         for (const card of cards) {
             const pageUrl = `https://wiredgeese.com${card.url}`;
             assertPublicUrls(card.html, pageUrl);
