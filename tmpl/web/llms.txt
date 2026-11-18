@@ -87,6 +87,7 @@ English Journal corpus:
 - https://wiredgeese.com/en/blog/2026/20260910-01-current-work-evidence.md
 - https://wiredgeese.com/en/blog/2026/20261022-01-teqcms-0-10-1-release.md
 - https://wiredgeese.com/en/blog/2026/20261030-01-pde-network-site.md
+- https://wiredgeese.com/en/blog/2026/20261118-01-telegram-desk-browser.md
 
 ## English Library Markdown corpus
 
